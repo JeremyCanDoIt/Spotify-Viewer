@@ -7,9 +7,9 @@ import { SpotifyService } from 'src/app/services/spotify.service';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-  name:string = null;
-  profile_pic:string = "../../../assets/unknown.jpg";
-  profile_link:string = null;
+   name:string = null;
+   profile_pic:string = "../../../assets/unknown.jpg";
+   profile_link:string = null;
 
   //TODO: inject the Spotify service
   constructor(private service:SpotifyService) { }
@@ -21,8 +21,19 @@ export class AboutComponent implements OnInit {
   /*TODO: create a function which gets the "about me" information from Spotify when the button in the view is clicked.
   In that function, update the name, profile_pic, and profile_link fields */
 
+  
   loadAboutMe(){
-    let new_data=this.service.aboutMe();
+   
+    
+    this.service.aboutMe().then((resp) => {
+      this.name = resp.name;
+      this.profile_pic = resp.imageURL;
+      this.profile_link = resp.spotifyProfile;
+      
+      
+    })
+
+    
   }
 
 

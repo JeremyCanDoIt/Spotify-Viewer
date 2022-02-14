@@ -23,14 +23,14 @@ export class SpotifyService {
     //Note: toPromise() is a deprecated function that will be removed in the future.
     //It's possible to do the assignment using lastValueFrom, but we recommend using toPromise() for now as we haven't
     //yet talked about Observables. https://indepth.dev/posts/1287/rxjs-heads-up-topromise-is-being-deprecated
-    let resp = this.http.get(this.expressBaseUrl + endpoint, {observe: 'response'})
+    let resp = this.http.get(this.expressBaseUrl + endpoint, {observe: 'response'});
     return lastValueFrom(resp);
   }
 
   aboutMe():Promise<ProfileData> {
     //This line is sending a request to express, which returns a promise with some data. We're then parsing the data 
     return this.sendRequestToExpress('/me').then((data) => {
-      return new ProfileData(data);
+      return new ProfileData(data['body']);
     });
   }
 
@@ -39,7 +39,29 @@ export class SpotifyService {
     //Make sure you're encoding the resource with encodeURIComponent().
     //Depending on the category (artist, track, album), return an array of that type of data.
     //JavaScript's "map" function might be useful for this, but there are other ways of building the array.
-    return null;
+    if(category=="artist"){
+      return this.sendRequestToExpress("/search/"+category+"/"+encodeURIComponent(resource)).then((data) => {
+        
+        let to_return =data['body']['artists']['items'].map(item=> new ArtistData(item));
+        
+        return to_return;
+      });
+    }
+    else if(category=="track"){
+      return this.sendRequestToExpress("/search/"+category+"/"+encodeURIComponent(resource)).then((data) => {
+        let to_return =data['body']['tracks']['items'].map(item=> new TrackData(item));
+        return to_return;
+      });
+    }
+    else{
+      return this.sendRequestToExpress("/search/"+category+"/"+encodeURIComponent(resource)).then((data) => {
+        let to_return =data['body']['albums']['items'].map(item=> new AlbumData(item));
+        return to_return;
+      });
+    }
+    
+    
+   
   }
 
   getArtist(artistId:string):Promise<ArtistData> {
