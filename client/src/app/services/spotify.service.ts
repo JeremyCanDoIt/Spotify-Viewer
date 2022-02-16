@@ -14,7 +14,9 @@ import { lastValueFrom } from 'rxjs';
 export class SpotifyService {
 	expressBaseUrl:string = 'http://localhost:8888';
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {
+   
+   }
 
   private sendRequestToExpress(endpoint:string):Promise<any> {
     //TODO: use the injected http Service to make a get request to the Express endpoint and return the response.
@@ -67,12 +69,19 @@ export class SpotifyService {
   getArtist(artistId:string):Promise<ArtistData> {
     //TODO: use the artist endpoint to make a request to express.
     //Again, you may need to encode the artistId.
-    return null;
+    return this.sendRequestToExpress('/artist/'+artistId).then((data) => {
+      return new ArtistData(data['body']);
+    });
   }
 
   getRelatedArtists(artistId:string):Promise<ArtistData[]> {
     //TODO: use the related artist endpoint to make a request to express and return an array of artist data.
-   return null;
+    ///artist-related-artists/:id'
+    return this.sendRequestToExpress('/artist-related-artists/'+artistId).then((data) => {
+      console.log(data["body"]['artists'])
+      return data["body"]['artists'].map((artist) => new ArtistData(artist));
+    });
+    
   }
 
   getTopTracksForArtist(artistId:string):Promise<TrackData[]> {

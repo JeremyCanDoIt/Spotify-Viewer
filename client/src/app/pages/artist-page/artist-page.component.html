@@ -1,19 +1,19 @@
 <div *ngIf="artist" class="row">
 	<div class="col-6">
 		<!--TODO: populate with artist name-->
-		<h1></h1>
+		<h1>{{artist.name}}</h1>
 		<!--TODO: populate with artist image URL-->
-		<img id="artistImg" src="../../../assets/unknown.jpg">
+		<img id="artistImg" [src]="artist.imageURL">
 		<p>
 			<!--TODO: link to artist page on spotify, display artist name-->
-			<a class="btn btn-light" role="button" target="_blank">Open ??? on Spotify</a>
+			<a [href]="artist.url" class="btn btn-light" role="button" target="_blank">Open {{artist.name}} on Spotify</a>
 		</p>
 	</div>
 	<div class="col-2">
 		<h3>Genres</h3>
 		<ul>
 			<!--TODO: loop over artist's genres and display them-->
-			<li>???</li>
+			<li *ngFor="let first=first; let i of artist.genres">{{i}}</li>
 		</ul>
 		<p>
 		</p>
@@ -34,6 +34,8 @@
 	<div class="col-6">
 		<h3>Similar Artists</h3>
 		<!--TODO: Display a carousel component for similar artists. Bind carousel's resources and give it a static carouselId.-->
+		<app-carousel  *ngIf="relatedArtists.length>0" carouselId="Related"[resources]="relatedArtists"></app-carousel>
+
 	</div>
 
 </div>

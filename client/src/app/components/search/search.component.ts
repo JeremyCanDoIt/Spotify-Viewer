@@ -34,8 +34,9 @@ export class SearchComponent implements OnInit {
     //TODO: call search function in spotifyService and parse response
     this.spotifyService.searchFor(this.searchCategory,this.searchString).then((promise) =>
     this.resources=promise
+    
     );
-  
+    
     if(this.searchCategory=="Album"||this.searchCategory=="Artist"){
         
     }
