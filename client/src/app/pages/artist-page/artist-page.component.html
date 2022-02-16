@@ -20,21 +20,23 @@
 	</div>
 	<div class="col-4">
 		<!--TODO: display artist name-->
-		<h3>???'s Top Tracks</h3>
+		<h3>{{artist.name}}'s Top Tracks</h3>
 		<!--TODO: display the artist's top tracks-->
+		<app-track-list *ngIf="topTracks" [tracks]="topTracks"></app-track-list>
 	</div>
 </div>
 
 <div *ngIf="artist" class="row">
 	<div class="col-6">
 		<!--TODO: display artist name-->
-		<h3>???'s Albums</h3>
+		<h3>{{artist.name}}'s Albums</h3>
 		<!--TODO: Display a carousel component for the artist's albums. Bind carousel's resources and give it a static carouselId.-->
+		<app-carousel  *ngIf="albums" carouselId="Albums"[resources]="albums"></app-carousel>
 	</div>
 	<div class="col-6">
 		<h3>Similar Artists</h3>
 		<!--TODO: Display a carousel component for similar artists. Bind carousel's resources and give it a static carouselId.-->
-		<app-carousel  *ngIf="relatedArtists.length>0" carouselId="Related"[resources]="relatedArtists"></app-carousel>
+		<app-carousel  *ngIf="relatedArtists" carouselId="Related"[resources]="relatedArtists"></app-carousel>
 
 	</div>
 
