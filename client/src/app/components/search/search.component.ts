@@ -13,33 +13,30 @@ import { ResourceData } from '../../data/resource-data';
 })
 export class SearchComponent implements OnInit {
   searchString:string;
-  carouselId:string="dasdasda";
+  carouselId:string="carousel-album-artist";
   searchCategory:string = 'artist';
   searchCategories:string[] = ['artist', 'album', 'track'];
   resources:ResourceData[];
-
   constructor(private spotifyService:SpotifyService) { }
 
   ngOnInit() {
-    let selector=document.getElementById("selectCat");
-    for (const category of this.searchCategories) {
-      var el = document.createElement("option");
-      el.textContent = category;
-      el.value = category;
-      selector.appendChild(el);
-  }
+  
   }
 
   search() {
     //TODO: call search function in spotifyService and parse response
+   
     this.spotifyService.searchFor(this.searchCategory,this.searchString).then((promise) =>
     this.resources=promise
-    
     );
     
-    if(this.searchCategory=="Album"||this.searchCategory=="Artist"){
-        
-    }
+    
   }
-
+  isTrackData()
+  {
+    if(this.resources){
+        return this.resources[0].constructor.name == "TrackData";
+    }
+    return false;
+  }
 }

@@ -10,7 +10,7 @@ export class TrackData extends ResourceData {
 	constructor(objectModel:{}) {
 		super(objectModel);
 		this.category = "track";
-
+		
 		this.artists = objectModel['artists'].map((artist) => {
 			return new ArtistData(artist);
 		});

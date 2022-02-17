@@ -17,14 +17,14 @@
             <td>{{i+1}}</td>
             <td>
                 <!--TODO: link to the endpoint for that track, display the track's name-->
-                <a [href]="app-tracklist">{{track.name}}</a>
+                <a href="./track/{{track.id}}">{{track.name}}</a>
             </td>
             <!--TODO: display the track's duration-->
             <td>{{track.durationStr}}</td>
             <!--TODO: Use *ngIf to hide if hideArtist is true; link to the first artist's endpoint and display the first artist's name-->
             <td><a *ngIf="hideArtist==false" href="./artist/{{track.primaryArtist.id}}">{{track.primaryArtist.name}}</a></td>
             <!--TODO: Use *ngIf to hide if hideAlbum is true; link to the album's endpoint and display the album's name-->
-            <td><a *ngIf="hideArtist==false" href="./album/{{track.album.id}}">{{track.album.name}}</a></td>
+            <td><a *ngIf="hideAlbum==false" href="./album/{{track.id}}">{{track.name}}</a></td>
         </tr>
     </tbody>
 </table>
