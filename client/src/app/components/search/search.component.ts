@@ -35,7 +35,6 @@ export class SearchComponent implements OnInit {
   isTrackData()
   {
     if(this.resources){
-      console.log(this.resources)
         return this.resources[0].constructor.name == "TrackData";
     }
     return false;
