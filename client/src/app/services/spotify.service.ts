@@ -117,11 +117,21 @@ export class SpotifyService {
 
   getTrack(trackId:string):Promise<TrackData> {
     //TODO: use the track endpoint to make a request to express.
-    return null;
+    return this.sendRequestToExpress('/track/' + trackId).then((data) => {
+      return new TrackData(data['body']);
+    })
   }
 
   getAudioFeaturesForTrack(trackId:string):Promise<TrackFeature[]> {
     //TODO: use the audio features for track endpoint to make a request to express.
-    return null;
+   return this.sendRequestToExpress('/track-audio-features/' + trackId).then((data) => {
+      let array = new Array();
+      for(let type of TrackFeature.FeatureTypes){
+        array.push(new TrackFeature(type,data['body'][type]));
+        //console.log(type);
+      }
+      return array;
+    });
+   
   }
 }

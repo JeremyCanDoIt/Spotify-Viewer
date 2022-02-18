@@ -4,10 +4,10 @@
 		<h1>{{album.name}}</h1>
 		<!--TODO: set src to album image URL-->
 		<img [src]="album.imageURL" id="albumImg">
-		<!--TODO: loop over album artists-->
+		<!--: loop over album artists-->
 		<p *ngFor="let c of album.artists">
 			<!--TODO: link to artist page, display artist name-->
-			Artist: <a>{{c.name}}</a>
+			Artist: <a href="./artist/{{c.id}}">{{c.name}}</a>
 		</p>
 		<p>
 			<!--TODO: link to artist page on spotify, display artist name-->

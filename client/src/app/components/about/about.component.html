@@ -1,11 +1,9 @@
 
-<!--TODO: Define click callback to load about me information-->
 <button (click)="loadAboutMe()" class="btn btn-light">Load info about me</button>
-<!--TODO: replace ??? to bind to name-->
-<h3 >Logged in user: {{name}}</h3>
-<!--TODO: bind img src's to profile_pic-->
-<img [src]="profile_pic">
+	<!--Made it so that unless 'load info' is pressed, name, img, and link don't show jsut like in professor's demo-->
+
+<h3 *ngIf="name">Logged in user: {{name}}</h3>
+<img *ngIf="name"[src]="profile_pic">
 <p>
-	<!--TODO: bind link's href to profile_link-->
-	<a [href]="profile_link" class="btn btn-light" target="_blank">Open profile on Spotify</a>	
+	<a *ngIf="name"[href]="profile_link" class="btn btn-light" target="_blank">Open profile on Spotify</a>	
 </p>
