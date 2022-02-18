@@ -41,7 +41,8 @@ Alice Hua, huaac1@uci.edu, huaac1
     I think my NPM version is slightly different so toPromise is already deprecated and I cannot use it
     Instead, I returned using 'lastValueFrom.' It works for mine and I finished the entire project with that,
     my partner could not get lastValueFrom to work correctly so she had to use toPromise. We are submitting mine,
-    so hopefully it will be able to work on other versions.
+    so hopefully it will be able to work on other versions. If it does not work, can we use my partners since
+    hers works with toPromise.
 
     This is my exact npm version: {
     npm: '8.1.2',
